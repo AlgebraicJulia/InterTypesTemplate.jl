@@ -1,0 +1,19 @@
+@schema SchPetri begin
+  Species::Ob
+  Transition::Ob
+  Input::Ob
+  Output::Ob
+  input_src::Hom(Input, Species)
+  input_tgt::Hom(Input, Transition)
+  output_src::Hom(Output, Transition)
+  output_tgt::Hom(Output, Species)
+end
+
+@acset_type PetriNet(SchPetri)
+
+@schema SchPetriWithRates <: SchPetri begin
+  Multiplier::AttrType(Float64)
+  rate_coefficient::Attr(Transition, Multiplier)
+end
+
+@acset_type PetriNetWithRates(SchPetriWithRates, generic=GenericPetriNetWithRates)

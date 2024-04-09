@@ -1,13 +1,12 @@
 module InterTypesTemplate
+export petris, sir
 
+using ACSets
 using ACSets.InterTypes
 
-@intertypes "wgraph.it" module wgraph end
+@intertypes "petris.it" module petris end
 
-using .wgraph
+using .petris
 
-@intertypes "simpleast.it" module simpleast end
-
-using .simpleast
 
 end # module InterTypesTemplate
