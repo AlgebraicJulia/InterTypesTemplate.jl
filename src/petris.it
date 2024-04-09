@@ -11,9 +11,11 @@ end
 
 @acset_type PetriNet(SchPetri)
 
-@schema SchPetriWithRates <: SchPetri begin
-  Multiplier::AttrType(Float64)
-  rate_coefficient::Attr(Transition, Multiplier)
+@schema SchPetriWithInfluencer <: SchPetri begin
+  Influencer::Ob
+
+  influencer_src::Hom(Influencer, Species)
+  influencer_tgt::Hom(Influencer, Transition)
 end
 
-@acset_type PetriNetWithRates(SchPetriWithRates, generic=GenericPetriNetWithRates)
+@acset_type PetriNetWithInfluencer(SchPetriWithInfluencer)

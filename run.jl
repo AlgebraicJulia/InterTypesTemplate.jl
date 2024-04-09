@@ -43,6 +43,26 @@ println("as JSON =>")
 println(JSON3.write(sir))
 println()
 
+sir_with_influencer = PetriNetWithInfluencer()
+copy_parts!(sir_with_influencer, sir)
+D = add_part!(sir_with_influencer, :Species)
+add_part!(sir_with_influencer, :Influencer; influencer_src=D, influencer_tgt=rec)
+
+# make a transition that uses doctors either as an input or output
+# med_school outputs doctors, hospital takes doctor as input along with infected people
+med_school = add_part!(sir_with_influencer, :Transition) 
+add_part!(sir_with_influencer, :Output; output_src=med_school, output_tgt=D)
+
+hospital = add_part!(sir_with_influencer, :Transition) 
+add_part!(sir_with_influencer, :Input; input_src=D, input_tgt=hospital)
+add_part!(sir_with_influencer, :Input; input_src=I, input_tgt=hospital)
+add_part!(sir_with_influencer, :Output; output_src=hospital, output_tgt=D)
+add_part!(sir_with_influencer, :Output; output_src=hospital, output_tgt=R)
+
+
+
+
+#=
 sir_with_rates = PetriNetWithRates()
 copy_parts!(sir_with_rates, sir)
 set_subpart!(sir_with_rates, inf, :rate_coefficient, 2.0)
@@ -54,3 +74,6 @@ println()
 println("as JSON =>")
 println(JSON3.write(sir_with_rates))
 println()
+=#
+
+
