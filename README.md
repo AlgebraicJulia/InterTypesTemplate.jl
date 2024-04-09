@@ -9,3 +9,10 @@ In the `src` folder, one can find a variety of example intertype definitions,
 and then in `run.jl` one can find the commands to export the definitions to
 supported formats. There are also informative comments in `run.jl`; it is good
 to read these to get a sense of the larger picture for intertypes.
+
+To execute `run.jl`, run
+
+```bash
+julia --project -e "import Pkg; Pkg.instantiate()"
+julia --project run.jl
+```
